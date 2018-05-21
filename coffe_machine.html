@@ -1,0 +1,115 @@
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+	<title>coffe_machine</title>
+</head>
+<body>
+
+	<button id = 'stop' onclick="vitek.stopMakeCoffe()" >Горшочек не вари</button>
+
+		<script type="text/javascript">
+			
+			function CoffeMachine(power, maxVolume) {
+				var waterVolume = 0
+
+				function getBoilTime() {
+					return ((waterVolume * 70 *4200) / power)
+				}
+
+				this.getMaxVolume = function(){
+					return maxVolume
+				}
+
+				this.check = function(){
+					return waterVolume
+				}
+
+				this.fill = function(newVolume){
+					if (newVolume > 199 && newVolume <= maxVolume){
+						waterVolume = newVolume
+					} else {
+						console.error("Incorrect water amount")
+					}
+
+				}
+
+
+
+				this.makeCoffe = function(){
+					waterAmount = waterVolume > 199
+					if(waterAmount){
+						var time = getBoilTime()
+
+						console.log('Wait ' + time + ' sec until your drink is done')
+
+						 setTime = setTimeout(function(){
+							console.log('YOUR COFFE IS DONE')
+							waterVolume = 0
+										}, time)
+					} 
+					else {
+						console.error('Coffe machine is empty!')
+					}
+				}
+
+				this.cupsAmount = function(){
+					switch (this.getMaxVolume()){
+						case 200:
+						console.log("Кофемашина приготовит 1 чашку кофе!")
+						break;
+						case 400:
+						console.log("Кофемашина приготовит 2 чашки кофе!")
+						break;
+						case 600:
+						console.log("Кофемашина приготовит 3 чашку кофе!")
+						break;
+						case 800:
+						console.log("Кофемашина приготовит 4 чашки кофе!")
+						break;
+
+					}
+				}
+
+				this.stopMakeCoffe=function(){
+
+					clearTimeout(setTime);
+					console.error("Stoped!")
+
+				}
+
+				
+
+					
+					
+
+			
+				
+				
+			}
+
+			var vitek = new CoffeMachine(29000, 800)
+			vitek.fill(vitek.getMaxVolume())
+
+			vitek.makeCoffe()
+			vitek.cupsAmount(vitek.getMaxVolume())
+			
+
+			
+			
+			
+		</script>
+	
+
+<!--
+ДЗ: 
+
+- нужно будет написать свою реализацию кофемашины, на основе полученных знаний (может уникальные методы, разные темепературы, разные сорта и т.д.)
+- принудительная остановка кофемашины
+
+предоставить ДЗ в виртуальной песочнице
+
+
+-->
+
+</body>
+</html>
